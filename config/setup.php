@@ -21,6 +21,9 @@ $sql = 'CREATE TABLE IF NOT EXISTS users (
 	u_reg_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
+$sql = 'INSERT INTO users(`u_name`, `email`, `group`, ) VALUES ("Administrator user", \'{"admin": 1}\')';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
 $sql = 'CREATE TABLE IF NOT EXISTS `groups` (
 	g_id INT AUTO_INCREMENT PRIMARY KEY,
 	g_name VARCHAR(50) NOT NULL,
