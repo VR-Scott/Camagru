@@ -1,6 +1,7 @@
 <?php
 $host = 'localhost';
-$user = 'root';
-$password = 'Griffin';
-$db = 'Camagru';
+$username = 'root';
+$password = 'root42';
+$db_name = 'Camagru';
+$hash = password_hash("Admin", PASSWORD_DEFAULT);
 ?>

@@ -1,12 +1,15 @@
 <?php
+
+require_once '/goinfre/vscott/Desktop/MAMP/apache2/htdocs/Camagru/config/database.php';
+
 session_start();
 
 $GLOBALS['config'] = array(
 	'mysql' => array(
-		'host' => 'localhost',
-		'username' => 'root',
-		'password' => 'Griffin',
-		'db' => 'Camagru'
+		'host' => $host,
+		'username' => $username,
+		'password' => $password,
+		'db_name' => $db_name
 	),
 	'remember' => array(
 		'cookie_name' => 'monster',
@@ -14,7 +17,8 @@ $GLOBALS['config'] = array(
 
 	),
 	'session' => array(
-		'session_name' => 'user'
+		'session_name' => 'user',
+		'token_name' => 'token'
 	)
 );
 
