@@ -13,7 +13,9 @@
 				$this->_pdo = new PDO('mysql:host=' . 
 				Config::get('mysql/host') .';dbname=' . 
 				Config::get('mysql/db_name'), Config::get('mysql/username'), 
-                Config::get('mysql/password'));
+				Config::get('mysql/password'));
+				$this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            	$this->_pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
                 
                 // echo 'Connected';
 
@@ -42,11 +44,12 @@
 				}
 				if($this->_query->execute()) {
 
-                    // echo "Success!";
-
 					$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
                     $this->_count = $this->_query->rowCount();
 				} else {
+					echo "<br>Fail!<br>";
+					var_dump($this->_error);
+
 					$this->_error = true;
 				}
 			}
@@ -95,13 +98,15 @@
 					$x++;
 				}
 
-
 				$sql = "INSERT INTO {$table} (`" . implode('`, `', $keys) . "`) VALUES ({$values})";
 
 				if (!$this->query($sql, $fields)->error()) {
 					return true;
 				}
+				echo "<br>";
+				var_dump($this->query($sql, $fields)->error());
 			}
+
 			return false;
 		}
 		

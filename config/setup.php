@@ -17,7 +17,8 @@ $sql = 'CREATE TABLE IF NOT EXISTS users (
 	u_name VARCHAR(50) NOT NULL,
 	email VARCHAR(100) NOT NULL,
 	`group` INT NOT NULL,
-	pword LONGTEXT	NOT NULL,
+	pword VARCHAR(64) NOT NULL,
+	salt VARCHAR(350) NOT NULL,
 	u_reg_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
@@ -27,8 +28,8 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $number_of_rows = $stmt->fetchColumn();
 if(!$number_of_rows) {
-	$sql = 'INSERT INTO users(`u_name`, `email`, `group`, `pword`)
-	VALUES ("Admin", "vaughan.r.scott@gmail.com", 1, "' . $hash . '")';
+	$sql = 'INSERT INTO users(`u_name`, `email`, `group`, `pword`, `salt`)
+	VALUES ("Admin", "vaughan.r.scott@gmail.com", 1, "' . $hash . '", "salt")';
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
 } else {

@@ -3,11 +3,17 @@
 	require_once 'config/setup.php';
 	require_once 'core/init.php';
 
+	if (Session::exists('home')) {
+		echo '<p>' . Session::flash('home') .'</p>';
+		// echo Session::flash('success');
+	}
 
-	$userInsert = DB::getInstance()->update('users', 7, array(
-			'pword' => 'Dspword',
-			'email' => 'dsemail@email.com'
-	));
+	//UPDATE
+
+	// $userInsert = DB::getInstance()->update('users', 7, array(
+	// 		'pword' => 'Dspword',
+	// 		'email' => 'dsemail@email.com'
+	// ));
 
 	//INSERT
 
