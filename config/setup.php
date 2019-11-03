@@ -32,8 +32,6 @@ if(!$number_of_rows) {
 	VALUES ("Admin", "vaughan.r.scott@gmail.com", 1, "' . $hash . '", "salt")';
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
-} else {
-	echo "not inserting Admin <br>";
 }
 $sql = 'CREATE TABLE IF NOT EXISTS `groups` (
 	g_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -50,8 +48,6 @@ if(!$number_of_rows) {
 	$sql = 'INSERT INTO `groups`(`g_name`) VALUES ("Standard user")';
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
-} else {
-	echo "not inserting Standard group <br>";
 }
 
 $sql = "SELECT count(*) FROM `groups` WHERE g_name = 'Administrator user'";
@@ -62,13 +58,11 @@ if(!$number_of_rows) {
 	$sql = 'INSERT INTO `groups`(`g_name`, `permissions`) VALUES ("Administrator user", \'{"admin": 1}\')';
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
-} else {
-	echo "not inserting Admin group <br>";
 }
 $sql = 'CREATE TABLE IF NOT EXISTS user_session (
 	s_id INT AUTO_INCREMENT PRIMARY KEY,
 	u_id INT NOT NULL,
-	hash VARCHAR(50) NOT NULL)';
+	hash VARCHAR(64) NOT NULL)';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
