@@ -29,7 +29,7 @@ $stmt->execute();
 $number_of_rows = $stmt->fetchColumn();
 if(!$number_of_rows) {
 	$sql = 'INSERT INTO users(`u_name`, `email`, `group`, `pword`, `salt`)
-	VALUES ("Admin", "vaughan.r.scott@gmail.com", 1, "' . $hash . '", "salt")';
+	VALUES ("Admin", "vaughan.r.scott@gmail.com", 2, "' . $hash . '", "' . $s_hash . '")';
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
 }
@@ -39,6 +39,8 @@ $sql = 'CREATE TABLE IF NOT EXISTS `groups` (
 	permissions TEXT)';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
+
+
 
 $sql = "SELECT count(*) FROM `groups` WHERE g_name = 'Standard user'";
 $stmt = $pdo->prepare($sql);
@@ -55,10 +57,12 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $number_of_rows = $stmt->fetchColumn();
 if(!$number_of_rows) {
-	$sql = 'INSERT INTO `groups`(`g_name`, `permissions`) VALUES ("Administrator user", \'{"admin": 1}\')';
+	$sql = 'INSERT INTO `groups`(`g_name`, `permissions`) VALUES ("Administrator user", \'{\r\n\"admin\": 1,\r\n\"mod\": 1\r\n}\')';
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
 }
+
+
 $sql = 'CREATE TABLE IF NOT EXISTS user_session (
 	s_id INT AUTO_INCREMENT PRIMARY KEY,
 	u_id INT NOT NULL,

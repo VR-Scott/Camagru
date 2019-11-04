@@ -3,5 +3,7 @@ $host = 'localhost';
 $username = 'root';
 $password = 'root42';
 $db_name = 'Camagru';
-$hash = password_hash("Admin", PASSWORD_DEFAULT);
+$s_hash = bin2hex(random_bytes(32));
+// $hash = password_hash("Admin", PASSWORD_DEFAULT);
+$hash = hash('sha256', "Admin". $s_hash)
 ?>
