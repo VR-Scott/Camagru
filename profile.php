@@ -8,6 +8,12 @@ if (!$u_name = Input::get('user')) {
     if (!$user->exists()) {
         Redirect::to(404);
     } else {
-        echo'exists';
+        $data = $user->data();
     }
+    ?>
+
+    <h3><?php echo escape($data->u_name); ?></h3>
+    <p>Email: <?php echo escape($data->email); ?></p>
+       
+    <?php
 }

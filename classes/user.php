@@ -104,7 +104,7 @@ class User {
         return false;
     }
 
-    public static function exists() {
+    public function exists() {
         return (!empty($this->_data)) ? true : false;
     }
 
