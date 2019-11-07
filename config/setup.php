@@ -19,17 +19,19 @@ $sql = 'CREATE TABLE IF NOT EXISTS users (
 	`group` INT NOT NULL,
 	pword VARCHAR(64) NOT NULL,
 	salt VARCHAR(350) NOT NULL,
+	confirmed TINYINT DEFAULT 0,
+	notify	TINYINT DEFAULT 0,
 	u_reg_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
-$sql = "SELECT count(*) FROM `users` WHERE u_name = 'Admin'";
+$sql = "SELECT count(*) FROM `users` WHERE BINARY u_name = 'Admin'";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $number_of_rows = $stmt->fetchColumn();
 if(!$number_of_rows) {
-	$sql = 'INSERT INTO users(`u_name`, `email`, `group`, `pword`, `salt`)
-	VALUES ("Admin", "vaughan.r.scott@gmail.com", 2, "' . $hash . '", "' . $s_hash . '")';
+	$sql = 'INSERT INTO users(`u_name`, `email`, `group`, `confirmed`, `notify`, `pword`, `salt`)
+	VALUES ("Admin", "vaughan.r.scott@gmail.com", 2, 1, 1, "' . $hash . '", "' . $s_hash . '")';
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
 }

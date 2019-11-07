@@ -67,7 +67,7 @@
 				$value = $where[2];
 
 				if (in_array($operator, $operators)) {
-					$sql= "{$action} FROM {$table} WHERE {$field} {$operator} ?";
+					$sql= "{$action} FROM {$table} WHERE BINARY {$field} {$operator} ?";
 					if(!$this->query($sql, array($value))->error()) {
 						return $this;
 					}

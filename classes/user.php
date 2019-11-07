@@ -16,7 +16,7 @@ class User {
             if (Session::exists($this->_sessionName)) {
                 $user = Session::get($this->_sessionName);
 
-                if ($this->find($user)) {
+                if ($this->find($user) && $this->data()->confirmed === 1) {
                     $this->_isLoggedIn = true;
                 } else {
                     //process Logout
@@ -58,7 +58,7 @@ class User {
         return false;
     }
 
-    public function login($u_name = null, $pword = null, $remember = false) {
+    public function login($u_name = null, $pword = null) {
         
 
         if (!$u_name && !$pword && $this->exists()) {
@@ -69,20 +69,24 @@ class User {
                 if ($this->data()->pword === Hash::make($pword, $this->data()->salt)) {
                     Session::put($this->_sessionName, $this->data()->u_id);
 
-                    if ($remember) {
-                        $hash = Hash::unique();
-                        $hashCheck = $this->_db->get('user_session', array('u_id', '=', $this->data()->u_id));
+                    // if ($remember) {
+                    //     $hash = Hash::unique();
+                    //     $hashCheck = $this->_db->get('user_session', array('u_id', '=', $this->data()->u_id));
 
-                        if (!$hashCheck->count()) {
-                            $this->_db->insert('user_session', array(
-                                'u_id' => $this->data()->u_id,
-                                'hash' => $hash
-                            ));
-                        } else {
-                            $hash = $hashCheck->first()->hash;
-                        }
+                    //     if (!$hashCheck->count()) {
+                    //         $this->_db->insert('user_session', array(
+                    //             'u_id' => $this->data()->u_id,
+                    //             'hash' => $hash
+                    //         ));
+                    //     } else {
+                    //         $hash = $hashCheck->first()->hash;
+                    //     }
 
-                        Cookie::put($this->_cookieName, $hash, Config::get('remember/cookie_expiry'));
+                    //     Cookie::put($this->_cookieName, $hash, Config::get('remember/cookie_expiry'));
+                    // }
+                    if ($this->data()->confirmed !== 1) {
+                        Session::flash('home', 'Please check your email for confirmation');
+                        Redirect::to('index.php');
                     }
                     return true;
                 }
@@ -110,10 +114,9 @@ class User {
 
     public function logout() {
 
-        $this->_db->delete('user_session', array('u_id', '=', $this->data()->u_id));
-
+        // $this->_db->delete('user_session', array('u_id', '=', $this->data()->u_id));
         Session::delete($this->_sessionName);
-        Cookie::delete($this->_cookieName);
+        // Cookie::delete($this->_cookieName);
     }
 
     public function data() {

@@ -52,19 +52,36 @@ require_once 'core/init.php';
 <form action="" method="post">
     <div class= "field">
         <label for="password_current">Current password</label>
-        <input type="password" name="password_current" id="password_current">
+        <input type="password" name="password_current" id="password_current"
+        required="" placeholder="Enter current password"
+        pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{6,64}$"
+        oninput="setCustomValidity('')" oninvalid="setCustomValidity('Invalid Password')">
     </div>
 
     <div class= "field">
         <label for="password_new">New password</label>
-        <input type="password" name="password_new" id="password_new">
+        <input type="password" name="password_new" id="password_new"
+        required="" placeholder="Enter new password"
+        pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{6,64}$" oninput="setCustomValidity('')"
+        oninvalid="setCustomValidity('Password must be alphanumeric and 6-64 characters long, Containing: a Uppercase, a Lowercase, a digit.')">
     </div>
 
     <div class= "field">
         <label for="password_new_again">New password again</label>
-        <input type="password" name="password_new_again" id="password_new_again">
+        <input type="password" name="password_new_again" id="password_new_again"
+        required="" placeholder="Enter new password again"
+        pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{6,64}$" oninput="setCustomValidity('')"
+        oninvalid="setCustomValidity('Password must be alphanumeric and 6-64 characters long, Containing: a Uppercase, a Lowercase, a digit.')">
     </div>
 
     <input type="submit" value="Change">
     <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 </form>
+
+<div class="field">
+        <a href="update.php"> Update Details</a>
+</div>
+
+<div class="field">
+        <a href="index.php"> Home</a>
+</div>
