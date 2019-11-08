@@ -17,3 +17,8 @@ if (!$u_name = Input::get('user')) {
        
     <?php
 }
+?>
+
+<div class="field">
+        <a href="upload/upload_image.php"> Upload image</a>
+</div>

@@ -1,4 +1,12 @@
 <?php
+require_once '../core/init.php';
+
+$user = new User();
+
+if(!$user->isLoggedIn()) {
+    Redirect::to('index.php');
+}
+
 if (isset($_POST['submit'])) {
     $file = $_FILES['file'];
 
@@ -23,8 +31,16 @@ if (isset($_POST['submit'])) {
             if ($fileSize < 500000) {
                 $fileNameNew = uniqid('', true) . "." . $fileActualExt;
                 $fileDestination = 'images/' . $fileNameNew;
+                $u_id = $user->data()->u_id;
+                $user->upload(array(
+                    'u_id' => $u_id,
+                    'i_dest' => "/goinfre/vscott/Desktop/MAMP/apache2/htdocs/Camagru/upload/" . $fileDestination,
+                    'i_name' => $fileNameNew,
+                    'creation_date' => date('Y-m-d H:i:s')
+                ));
                 move_uploaded_file($fileTmpName, $fileDestination);
-                header("Location: index.php?uploadsuccess");
+                Session::flash('upload', 'Image Uploaded');
+                Redirect::to('upload_image.php');
             } else {
                 echo "Your file is too big!";
             }

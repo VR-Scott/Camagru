@@ -38,6 +38,13 @@ class User {
         }
     } 
 
+    public function upload($fields = array()) {
+        // var_dump($fields);
+        if (!$this->_db->insert('images', $fields)) {
+            throw new Exception('There was a problem uploading your images.');
+        }
+    }
+
     public function create($fields = array()) {
         // var_dump($fields);
         if (!$this->_db->insert('users', $fields)) {
@@ -117,6 +124,10 @@ class User {
         // $this->_db->delete('user_session', array('u_id', '=', $this->data()->u_id));
         Session::delete($this->_sessionName);
         // Cookie::delete($this->_cookieName);
+    }
+
+    public function db() {
+        return $this->_db;
     }
 
     public function data() {

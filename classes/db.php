@@ -76,6 +76,10 @@
 			return false;
 		}
 
+		public function get_property($property,$table, $where) {
+			return $this->action('SELECT', $property, $table, $where);
+		}
+
 		public function get($table, $where) {
 			return $this->action('SELECT *', $table, $where);
 		}
