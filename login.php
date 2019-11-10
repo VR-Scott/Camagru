@@ -1,8 +1,8 @@
 <?php
 require_once 'core/init.php';
 
-if (Session::exists('home')) {
-    echo '<p>' . Session::flash('home') .'</p>';
+if (Session::exists('login')) {
+    echo '<p>' . Session::flash('login') .'</p>';
     // echo Session::flash('success');
 }
 
@@ -58,4 +58,8 @@ if (Input::exists()) {
 
 <div class="field">
         <a href="forgot.php"> Forgot Password</a>
+</div>
+
+<div class="field">
+        <a href="index.php">Home</a>
 </div>

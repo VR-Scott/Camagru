@@ -29,8 +29,9 @@ if (Input::exists()) {
 
 <form action="" method="post">
     <div class="field">
-        <label for="notify">Notify me</label>
-        <input type="checkbox" name="notify" value=1>
+            <p>Check the box if you want to be notified<br>OR leave it un-checked<br>Then click "Update notify"</p>
+            <label for="notify">Notify me</label>
+            <input type="checkbox" name="notify" value=1>
         <input type="submit" value="Update notify">
         <input type="hidden" name="token" id="token" value="<?php echo Token::generate(); ?>">
     </div>

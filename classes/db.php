@@ -32,6 +32,7 @@
 
 		public function query($sql, $params = array()) {
 			$this->_error = false;
+			// echo $sql . "<br>";
 			if ($this->_query = $this->_pdo->prepare($sql)) {
 
                 // echo 'Success';
@@ -45,6 +46,35 @@
 				if($this->_query->execute()) {
 
 					$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
+					
+                    $this->_count = $this->_query->rowCount();
+				} else {
+					echo "<br>Fail!<br>";
+					var_dump($this->_error);
+
+					$this->_error = true;
+				}
+			}
+			return $this;
+		}
+
+		public function query_arr($sql, $params = array()) {
+			$this->_error = false;
+			// echo $sql . "<br>";
+			if ($this->_query = $this->_pdo->prepare($sql)) {
+
+                // echo 'Success';
+				$x = 1;
+				if(count($params)) {
+					foreach($params as $param) {
+						$this->_query->bindValue($x, $param);
+						$x++;
+					}
+				}
+				if($this->_query->execute()) {
+
+					$this->_results = $this->_query->fetchAll(PDO::FETCH_ASSOC);
+					
                     $this->_count = $this->_query->rowCount();
 				} else {
 					echo "<br>Fail!<br>";
@@ -76,8 +106,32 @@
 			return false;
 		}
 
+		public function get_user_images($u_id, $page) {
+			$eq= '=';
+			$sql= "SELECT i_name, u_id FROM images WHERE u_id {$eq} {$u_id} ORDER BY i_id DESC LIMIT $page,6"; // set limit to display 6 images 
+			return $this->query_arr($sql)->_results;
+		}
+
+		public function get_gallery($page) {
+			$sql= "SELECT i_name, u_id FROM images LIMIT $page,6"; // set limit to display 6 images 
+			return $this->query_arr($sql)->_results;
+		}
+
+		public function user_img_count($u_id) {
+			$eql= '=';
+			$sql= "SELECT i_name FROM images WHERE u_id {$eql} {$u_id}";  
+				return $this->query($sql)->_query->rowCount();
+		}
+
+		public function gallery_count() {
+			$sql= "SELECT i_name FROM images";  
+			return $this->query($sql)->_query->rowCount();
+		}
+
 		public function get_property($property,$table, $where) {
-			return $this->action('SELECT', $property, $table, $where);
+			// echo $property . "<br>" .  $table . "<br>";
+			// echo "<br>";
+			return $this->action('SELECT ' . $property , $table, $where)->_results;
 		}
 
 		public function get($table, $where) {
@@ -108,7 +162,6 @@
 					return true;
 				}
 				echo "<br>";
-				var_dump($this->query($sql, $fields)->error());
 			}
 
 			return false;

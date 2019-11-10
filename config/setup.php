@@ -75,7 +75,7 @@ $stmt->execute();
 $sql = 'CREATE TABLE IF NOT EXISTS images (
 	i_id INT AUTO_INCREMENT PRIMARY KEY,
 	u_id INT NOT NULL,
-	i_dest VARCHAR(50) NOT NULL,
+	i_dest VARCHAR(130) NOT NULL,
 	i_name VARCHAR(64) NOT NULL,
 	creation_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)';
 $stmt = $pdo->prepare($sql);
