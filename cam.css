@@ -1,0 +1,30 @@
+.booth {
+    width: 60%;
+    height: auto;
+    position: absolute;
+}
+
+#canvas {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#upload {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#video {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.cambuttons {
+    padding-top: 1%;
+    position: flex;
+    flex-direction: row;
+}

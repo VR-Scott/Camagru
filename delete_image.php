@@ -9,6 +9,8 @@ if (!Input::get("logged_in")){
 
 $db = DB::getInstance();
 $i_name = Input::get("i_name");
+$path = "./upload/images/" . $i_name;
+unlink($path);
 $db->delete('images', array('i_name', '=', $i_name));
 // $email = ($db->get_property('email','users', array('u_id', '=', $u_id)))[0]->email;
 // if (($db->get_property('notify','users', array('u_id', '=', $u_id)))[0]->notify) {
@@ -20,5 +22,5 @@ $db->delete('images', array('i_name', '=', $i_name));
 //     $headers .= "Content-Type:text/html;charset=UTF-8". "\r\n";
 //     mail($email, $subject, $message, $headers);
 // }
-Session::flash('upload', 'Image Deleted!');
+Session::flash('upload',' Image Deleted!');
 Redirect::to('./upload/upload_image.php');
