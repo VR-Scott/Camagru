@@ -62,11 +62,13 @@ if (isset($_POST['submit'])) {
         <a href ="#" id="capture" class="capturebtn">Take Photo</a>
         <!-- <canvas id="sticker" width="400" height="300" style="position: absolute;top: 0px;left: 0px;z-index: 2;width: 100%;"></canvas> -->
         
-        <button type="button" style="font-size: 1.6vh;" class="" onclick="camReset()">Retake photo</button>
+        <button type="button" style="font-size: 1.6vh;" class="" onclick="camReset()">Camera</button>
+        <a href ="#" id="save" class="capturebtn">Save</a>
         <form action="" method="POST" enctype="multipart/form-data">
         <input type="file" name="file">
         <button type="submit" name="submit" required="">UPLOAD</button>
         </form>
+
         
         <!-- <a href ="#" id="upload" class="uploadbtn">Upload</a> -->
     </div>
