@@ -44,6 +44,7 @@
          'creation_date' => date('Y-m-d H:i:s'),
          'i_dest' => $imagepath
       ));
+      unlink("./tmp/tmp.png");
    }
    else {
       echo 'failed to post image';

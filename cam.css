@@ -10,11 +10,31 @@
     top: 0;
     left: 0;
 }
-#canvas2 {
-    width: 100%;
+#stick1 {
+    width: 10%;
     position: absolute;
-    top: 285;
+    top: 10%;
     left: 0;
+    z-index: 3;
+    visibility: hidden;
+}
+
+#stick2 {
+    width: 10%;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    z-index: 3;
+    visibility: hidden;
+}
+
+#stick3 {
+    width: 10%;
+    position: absolute;
+    top: 30%;
+    left: 0;
+    z-index: 3;
+    visibility: hidden;
 }
 #upload {
     width: 100%;
