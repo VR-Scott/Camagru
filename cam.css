@@ -1,7 +1,31 @@
 .booth {
-    width: 60%;
+    float: left;
+    width: 40%;
     height: auto;
-    position: absolute;
+    position: relative;
+    padding-left: 1%;
+    ;
+}
+
+.images {
+    float: left;
+    width: 40%;
+    padding-left: 1%;
+    
+}
+
+.stickers {
+    background-color: blueviolet;
+}
+
+#place1 {
+    background-color: dimgray;
+}
+#place2 {
+    background-color: dimgray;
+}
+#place3 {
+    background-color: dimgray;
 }
 
 #canvas {
@@ -10,35 +34,36 @@
     top: 0;
     left: 0;
 }
+
 #stick1 {
-    width: 10%;
+    width: 25%;
     position: absolute;
-    top: 10%;
-    left: 0;
+    top: 75%;
+    left: 75%;
     z-index: 3;
     visibility: hidden;
 }
 
 #stick2 {
-    width: 10%;
+    width: 25%;
     position: absolute;
-    top: 20%;
+    top: 0%;
     left: 0;
     z-index: 3;
     visibility: hidden;
 }
 
 #stick3 {
-    width: 10%;
+    width: 25%;
     position: absolute;
-    top: 30%;
+    top: 75%;
     left: 0;
     z-index: 3;
     visibility: hidden;
 }
 #upload {
     width: 100%;
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
 }
@@ -48,7 +73,9 @@
     top: 0;
     left: 0;
 }
-
+.picture {
+    position: relative;
+}
 .cambuttons {
     padding-top: 1%;
     position: flex;

@@ -1,11 +1,13 @@
 var save;
-(function() {
+(function (){
     var video = document.getElementById('video'),
         canvas = document.getElementById('canvas'),
-        context = canvas.getContext('2d');
+        context = canvas.getContext('2d'),
+        bob = document.getElementById('bob');
         place1 = document.getElementById('place1'),
         place2 = document.getElementById('place2'),
-        place3 = document.getElementById('place3'),
+        place3 = document.getElementById('place3');
+        
     
     
     navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
@@ -44,27 +46,44 @@ var save;
         document.getElementById("canvas").style.zIndex = "1";
     });
 
+    bob.addEventListener('click', function() {
+            
+            const url = "./uploading_to_cam.php";
+            var xhttp = new XMLHttpRequest();
+            
+            xhttp.open("POST", url, true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    var response = xhttp.responseText;
+                    // document.getElementById("imgsec").innerhtml = xhhtp.
+                    console.log(response);
+                }
+            }
+            xhttp.send();
+    });
+
     place1.addEventListener('click', function() {
         if (document.getElementById("stick1").style.visibility === "visible") {
-            document.getElementById("stick1").style.visibility = "hidden"
+            document.getElementById("stick1").style.visibility = "hidden";
         } else {
-            document.getElementById("stick1").style.visibility = "visible"
+            document.getElementById("stick1").style.visibility = "visible";
         }
     });
 
     place2.addEventListener('click', function() {
         if (document.getElementById("stick2").style.visibility === "visible") {
-            document.getElementById("stick2").style.visibility = "hidden"
+            document.getElementById("stick2").style.visibility = "hidden";
         } else {
-            document.getElementById("stick2").style.visibility = "visible"
+            document.getElementById("stick2").style.visibility = "visible";
         }
     });
 
     place3.addEventListener('click', function() {
         if (document.getElementById("stick3").style.visibility === "visible") {
-            document.getElementById("stick3").style.visibility = "hidden"
+            document.getElementById("stick3").style.visibility = "hidden";
         } else {
-            document.getElementById("stick3").style.visibility = "visible"
+            document.getElementById("stick3").style.visibility = "visible";
         }
     });
 
@@ -73,11 +92,23 @@ var save;
         console.log(save);
         if (save) {
             var layer1 = canvas.toDataURL('image/png');
-            console.log(layer1);
-            // var layer2 = overlaycanvas.toDataURL('image/png');
+            
             const url = "./upload_canvas.php";
             var xhttp = new XMLHttpRequest();
-            var values = "baseimage=" + layer1 /*+ "&overlayimage=" + layer2*/;
+            var values = "baseimage=" + layer1;
+            if (document.getElementById("stick1").style.visibility === "visible") {
+                var sticker1 = 1;
+                values = values.concat("&sticker1=" + sticker1);
+            }
+            if (document.getElementById("stick2").style.visibility === "visible") {
+                var sticker2 = 1;
+                values = values.concat("&sticker2=" + sticker2);
+            }
+            if (document.getElementById("stick3").style.visibility === "visible") {
+                var sticker3 = 1;
+                values = values.concat("&sticker3=" + sticker3);
+            }
+            
             // alert("Your image has been posted\nPlease refresh");
             xhttp.open("POST", url, true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -93,10 +124,10 @@ var save;
         }
     });
 
-})();
+}());
 
 function camReset() {
-    save = 0;
+    save =0;
     document.getElementById("canvas").style.zIndex = "-1";
  }
 
@@ -111,7 +142,3 @@ function camReset() {
 //     // context.drawImage(upload, 0, 0, 500, 375);
 //     // document.getElementById("canvas").style.zIndex = "99";
 // }
-window.onbeforeunload = function()
-{
-
-};

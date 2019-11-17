@@ -27,7 +27,7 @@ $logged_in = ($user->isLoggedIn()) ? 1 : 0 ;
         foreach($res as $key => $value){
             ?>
             <span>
-                <img src="http://localhost:8080/Camagru/upload/images/<?php echo $value['i_name'] ?>" width= 30% heigth=30%>
+                <img src="http://localhost:8080/Camagru/usergallery/<?php echo $value['i_name'] ?>" width= 30% heigth=30%>
                 <form action="like.php" method="post">
                     <input type="hidden" name="logged_in" value="<?php echo $logged_in ?>">
                     <input type="hidden" name="u_id" value="<?php echo $value['u_id'] ?>">
