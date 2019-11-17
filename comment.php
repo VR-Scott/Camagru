@@ -22,7 +22,7 @@ if (($db->get_property('notify','users', array('u_id', '=', $u_id)))[0]->notify)
     mail($email, $subject, $message, $headers);
 }
 $db->insert('comments', array(
-    'i_id' => $i_d,
+    'i_id' => $i_id,
     'u_id' => $u_id,
     'commenter_id' => $commenter_id,
     'creation_date' => date('Y-m-d H:i:s'),
