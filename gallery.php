@@ -30,9 +30,13 @@ $u_id = $user->data()->u_id;
         }
         $res = $user->db()->get_gallery($page);
         foreach($res as $key => $value){
+            $likes = $user->db()->get_property_count('l_id','likes', 'i_id', $value['i_id']);
+            $comments = $user->db()->get_property_count('c_id','comments', 'i_id', $value['i_id']);
             ?>
             <span>
-                <img src="http://localhost:8080/Camagru/usergallery/<?php echo $value['i_name'] ?>" width= 30% heigth=30%>
+                <a href="http://localhost:8080/Camagru/view_image.php?name=<?php echo $value['i_name']?>&u_id=<?php echo $u_id?>">
+                    <img src="http://localhost:8080/Camagru/usergallery/<?php echo $value['i_name'] ?>" width= 30% heigth=30%>
+                </a>
                 <form action="like.php" method="post">
                     <input type="hidden" name="logged_in" value="<?php echo $logged_in ?>">
                     <input type="hidden" name="u_id" value="<?php echo $value['u_id'] ?>">
@@ -48,7 +52,7 @@ $u_id = $user->data()->u_id;
                     <input type="text" name="comment"><br>
 		            <input type="submit" value="Comment">
                 </form>
-                
+                <p><?php echo "Likes: " . $likes . " Comments: " . $comments?></p>   
             </span>
             <?php
         }

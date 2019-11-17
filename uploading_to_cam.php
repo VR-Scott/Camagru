@@ -1,7 +1,6 @@
 
 <?php
 require_once 'core/init.php';
-echo "hello";
 $user = new User();
 
 if(!$user->isLoggedIn()) {

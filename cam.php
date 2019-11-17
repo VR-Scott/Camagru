@@ -29,6 +29,8 @@ if (Session::exists('upload')) {
                 }
                 $res = $user->db()->get_user_images($u_id,$page);
                 foreach($res as $key => $value){
+                    $likes = $user->db()->get_property_count('l_id','likes', 'i_id', $value['i_id']);
+                    $comments = $user->db()->get_property_count('c_id','comments', 'i_id', $value['i_id']);   
             ?>
             <span>
                 <img src="http://localhost:8080/Camagru/usergallery/<?php echo $value['i_name'] ?>" width= 100% >
@@ -38,7 +40,8 @@ if (Session::exists('upload')) {
                     <input type="hidden" name="i_id" value="<?php echo $value['i_id'] ?>">
                     <input type="hidden" name="i_name" value="<?php echo $value['i_name'] ?>">
                     <input type="submit" value="Delete">
-                </form>  
+                </form>
+                <p><?php echo "Likes: " . $likes . " Comments: " . $comments?></p>
             </span>
             <?php
                 }

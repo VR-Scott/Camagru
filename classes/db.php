@@ -124,12 +124,27 @@
 			return $this->query_arr($sql)->_results;
 		}
 
+		public function get_comments($i_id, $page) {
+			$eq= '=';
+			$sql= "SELECT comment, commenter_id FROM comments WHERE i_id {$eq} {$i_id} ORDER BY c_id DESC LIMIT $page,6"; // set limit to display 6 images 
+			return $this->query($sql)->_results;
+		}
+
 		public function get_gallery($page) {
 			$sql= "SELECT i_name, u_id, i_id FROM images ORDER BY i_id DESC LIMIT $page,6"; // set limit to display 6 images 
 			return $this->query_arr($sql)->_results;
 		}
 
+		public function get_i_data($table, $where) {
+			return $this->get($table, $where)->_results;
+		}
+
 		public function user_img_count($u_id) {
+			$eql= '=';
+			$sql= "SELECT i_name FROM images WHERE u_id {$eql} {$u_id}";  
+				return $this->query($sql)->_query->rowCount();
+		}
+		public function comment_count($u_id) {
 			$eql= '=';
 			$sql= "SELECT i_name FROM images WHERE u_id {$eql} {$u_id}";  
 				return $this->query($sql)->_query->rowCount();
@@ -142,6 +157,12 @@
 
 		public function get_property($property,$table, $where) {
 			return $this->action('SELECT ' . $property , $table, $where)->_results;
+		}
+
+		public function get_property_count($property,$table, $field, $var) {
+			$eql= '=';
+			$sql= "SELECT {$property} FROM {$table} WHERE {$field} {$eql} {$var}";  
+				return $this->query($sql)->_query->rowCount();
 		}
 
 		public function get($table, $where) {
