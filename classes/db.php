@@ -113,7 +113,7 @@
 		}
 
 		public function get_gallery($page) {
-			$sql= "SELECT i_name, u_id FROM images LIMIT $page,6"; // set limit to display 6 images 
+			$sql= "SELECT i_name, u_id FROM images ORDER BY i_id DESC LIMIT $page,6"; // set limit to display 6 images 
 			return $this->query_arr($sql)->_results;
 		}
 
