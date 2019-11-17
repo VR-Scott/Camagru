@@ -17,6 +17,10 @@ $logged_in = ($user->isLoggedIn()) ? 1 : 0 ;
 <head>
 </head>
 <body>
+    <div class="field">
+        <a href="index.php">Home</a>
+        <br><br><br><br>
+    </div>
     <?php
         $page = 0;
         if (isset($_POST["page"])) {
@@ -57,8 +61,6 @@ $logged_in = ($user->isLoggedIn()) ? 1 : 0 ;
             <?php
         }
     ?>
-    <div class="field">
-        <a href="index.php">Home</a>
-    </div>
+    
 </body>
 </html>

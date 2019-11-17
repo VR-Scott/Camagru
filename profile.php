@@ -20,5 +20,5 @@ if (!$u_name = Input::get('user')) {
 ?>
 
 <div class="field">
-        <a href="upload/upload_image.php"> Upload image</a>
+        <a href="cam.php"> Upload image</a>
 </div>

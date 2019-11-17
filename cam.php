@@ -7,6 +7,10 @@ if(!$user->isLoggedIn()) {
     Redirect::to('index.php');
 }
 
+if (Session::exists('upload')) {
+    echo '<p>' . Session::flash('upload') .'</p>';
+}
+
 
 ?>
 <html>
@@ -17,6 +21,7 @@ if(!$user->isLoggedIn()) {
         <div class="images">
             <?php
                 $u_id = $user->data()->u_id;
+                $u_name = $user->data()->u_name;
                 $page = 0;
                 if (isset($_POST["page"])) {
                     $page = $_POST["page"];
@@ -27,7 +32,7 @@ if(!$user->isLoggedIn()) {
             ?>
             <span>
                 <img src="http://localhost:8080/Camagru/usergallery/<?php echo $value['i_name'] ?>" width= 100% >
-                <form action="../delete_image.php" method="post">
+                <form action="delete_image.php" method="post">
                     <input type="hidden" name="logged_in" value="<?php echo $logged_in ?>">
                     <input type="hidden" name="u_id" value="<?php echo $value['u_id'] ?>">
                     <input type="hidden" name="i_name" value="<?php echo $value['i_name'] ?>">
@@ -53,6 +58,15 @@ if(!$user->isLoggedIn()) {
             ?>
         </div>
         <div class="booth">
+            <div class="field">
+                <a href="index.php"> Home</a>
+            </div>
+            <div class="field">
+                <a href="profile.php"><?php echo $u_name?></a>
+            </div>
+            <div class="field">
+                <a href="logout.php">Log-out</a>
+            </div>
         
             <div class="picture">
                 <video id="video" width="100%"></video>
@@ -71,7 +85,7 @@ if(!$user->isLoggedIn()) {
                 
             </div>
             
-            <a href="./uploading_to_cam.php" id="bob">Image from Device</a>
+            <a href="./uploading_to_cam.php" id="bob">Get image from Device</a>
             
             <div class="stickers">
                 <h3 style="margin: 0;">Stickers</h3>
