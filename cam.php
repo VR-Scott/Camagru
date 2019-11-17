@@ -35,7 +35,7 @@ if (Session::exists('upload')) {
                 <form action="delete_image.php" method="post">
                     <input type="hidden" name="logged_in" value="<?php echo $logged_in ?>">
                     <input type="hidden" name="u_id" value="<?php echo $value['u_id'] ?>">
-                    <input type="hidden" name="i_name" value="<?php echo $value['i_name'] ?>">
+                    <input type="hidden" name="i_id" value="<?php echo $value['i_id'] ?>">
                     <input type="submit" value="Delete">
                 </form>  
             </span>

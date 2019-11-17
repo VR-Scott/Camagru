@@ -11,6 +11,7 @@ $db = DB::getInstance();
 $i_name = Input::get("i_name");
 $path = "./usergallery/" . $i_name;
 unlink($path);
+$db->delete('likes', array('i_id', '=', $i_id));
 $db->delete('images', array('i_name', '=', $i_name));
 
 Session::flash('upload',' Image Deleted!');

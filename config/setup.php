@@ -80,4 +80,22 @@ $sql = 'CREATE TABLE IF NOT EXISTS images (
 	creation_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
+$sql = 'CREATE TABLE IF NOT EXISTS comments (
+	c_id INT AUTO_INCREMENT PRIMARY KEY,
+	i_id INT NOT NULL,
+	u_id INT NOT NULL,
+	commenter_id INT NOT NULL,
+	comment LONGTEXT NOT NULL,
+	creation_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$sql = 'CREATE TABLE IF NOT EXISTS likes (
+	l_id INT AUTO_INCREMENT PRIMARY KEY,
+	i_id INT NOT NULL,
+	u_id INT NOT NULL,
+	`status` TINYINT NOT NULL,
+	liker_id INT NOT NULL,
+	creation_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
 ?>

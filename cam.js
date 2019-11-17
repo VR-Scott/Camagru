@@ -120,6 +120,7 @@ var save;
                 }
             }
             xhttp.send(values);
+            alert("Please refresh to see your recently saved image.");
             save = 0;
         }
     });

@@ -9,6 +9,7 @@ if (Session::exists('gallery')) {
 
 $user = new User();
 $logged_in = ($user->isLoggedIn()) ? 1 : 0 ;
+$u_id = $user->data()->u_id;
     
 
 
@@ -35,11 +36,15 @@ $logged_in = ($user->isLoggedIn()) ? 1 : 0 ;
                 <form action="like.php" method="post">
                     <input type="hidden" name="logged_in" value="<?php echo $logged_in ?>">
                     <input type="hidden" name="u_id" value="<?php echo $value['u_id'] ?>">
+                    <input type="hidden" name="liker" value="<?php echo $u_id ?>">
+                    <input type="hidden" name="i_id" value="<?php echo $value['i_id'] ?>">
 		            <input type="submit" value="Like">
                 </form>
                 <form action="comment.php" method="post">
                     <input type="hidden" name="logged_in" value="<?php echo $logged_in ?>">
                     <input type="hidden" name="u_id" value="<?php echo $value['u_id'] ?>">
+                    <input type="hidden" name="commenter" value="<?php echo $u_id ?>">
+                    <input type="hidden" name="i_id" value="<?php echo $value['i_id'] ?>">
                     <input type="text" name="comment"><br>
 		            <input type="submit" value="Comment">
                 </form>

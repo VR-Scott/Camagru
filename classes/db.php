@@ -106,14 +106,26 @@
 			return false;
 		}
 
+		public function get_like_status($liker_id, $i_id) {
+			$eq = '=';
+			$sql = "SELECT `status` FROM likes WHERE liker_id {$eq} {$liker_id} AND i_id {$eq} {$i_id} ";
+			return $this->query($sql)->_results;
+		}
+
+		public function get_like_id($liker_id, $i_id) {
+			$eq = '=';
+			$sql = "SELECT `l_id` FROM likes WHERE liker_id {$eq} {$liker_id} AND i_id {$eq} {$i_id} "; 
+			return $this->query($sql)->_results;
+		}
+
 		public function get_user_images($u_id, $page) {
 			$eq= '=';
-			$sql= "SELECT i_name, u_id FROM images WHERE u_id {$eq} {$u_id} ORDER BY i_id DESC LIMIT $page,6"; // set limit to display 6 images 
+			$sql= "SELECT i_name, u_id, i_id FROM images WHERE u_id {$eq} {$u_id} ORDER BY i_id DESC LIMIT $page,6"; // set limit to display 6 images 
 			return $this->query_arr($sql)->_results;
 		}
 
 		public function get_gallery($page) {
-			$sql= "SELECT i_name, u_id FROM images ORDER BY i_id DESC LIMIT $page,6"; // set limit to display 6 images 
+			$sql= "SELECT i_name, u_id, i_id FROM images ORDER BY i_id DESC LIMIT $page,6"; // set limit to display 6 images 
 			return $this->query_arr($sql)->_results;
 		}
 
@@ -129,8 +141,6 @@
 		}
 
 		public function get_property($property,$table, $where) {
-			// echo $property . "<br>" .  $table . "<br>";
-			// echo "<br>";
 			return $this->action('SELECT ' . $property , $table, $where)->_results;
 		}
 
