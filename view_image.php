@@ -34,6 +34,20 @@ $comments = $db->get_property_count('c_id','comments', 'i_id', $i_id);
     <p><?php echo "Likes: " . $likes . " Comments: " . $comments?></p>
 </div>
 
+<?php
+    if (Input::get("src") == "edit"){
+      ?>
+            <form action="delete_image.php" method="post">
+                <input type="hidden" name="logged_in" value="<?php echo $logged_in ?>">
+                <input type="hidden" name="u_id" value="<?php echo $value['u_id'] ?>">
+                <input type="hidden" name="i_id" value="<?php echo $value['i_id'] ?>">
+                <input type="hidden" name="i_name" value="<?php echo $value['i_name'] ?>">
+                <input type="submit" value="Delete">
+            </form>
+      <?php  
+    }
+?>
+
 
 <h3>Comments:</h3>
 <br>
