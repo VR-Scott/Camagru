@@ -13,9 +13,12 @@
 				$this->_pdo = new PDO('mysql:host=' . 
 				Config::get('mysql/host') .';dbname=' . 
 				Config::get('mysql/db_name'), Config::get('mysql/username'), 
-				Config::get('mysql/password'));
+				Config::get('mysql/password'), array(
+					PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+				));
 				$this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            	$this->_pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+				$this->_pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+				
                 
                 // echo 'Connected';
 

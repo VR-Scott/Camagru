@@ -2,10 +2,12 @@
 require_once 'core/init.php';
 
 $user = new User();
-
-if(!$user->isLoggedIn()) {
+$logged_in = ($user->isLoggedIn()) ? 1 : 0 ;
+if(!$logged_in) {
     Redirect::to('index.php');
 }
+
+
 
 if (Session::exists('upload')) {
     echo '<p>' . Session::flash('upload') .'</p>';
@@ -33,7 +35,11 @@ if (Session::exists('upload')) {
                     $comments = $user->db()->get_property_count('c_id','comments', 'i_id', $value['i_id']);   
             ?>
             <span>
-                <img src="http://localhost:8080/Camagru/usergallery/<?php echo $value['i_name'] ?>" width= 100% >
+            <a href="http://localhost:8080/Camagru/view_image.php?name=<?php echo $value['i_name']?>&u_id=<?php
+                 echo $u_id?>&logged_in=<?php echo $logged_in ?>&src=edit">
+                    <img src="http://localhost:8080/Camagru/usergallery/<?php echo $value['i_name'] ?>" width= 100% >
+                </a>
+                <!-- <img src="http://localhost:8080/Camagru/usergallery/<?php echo $value['i_name'] ?>" width= 100% > -->
                 <form action="delete_image.php" method="post">
                     <input type="hidden" name="logged_in" value="<?php echo $logged_in ?>">
                     <input type="hidden" name="u_id" value="<?php echo $value['u_id'] ?>">

@@ -9,8 +9,10 @@ if (Session::exists('gallery')) {
 
 $user = new User();
 $logged_in = ($user->isLoggedIn()) ? 1 : 0 ;
-$u_id = $user->data()->u_id;
+
+$u_id = ($logged_in) ? $user->data()->u_id : '';
     
+
 
 
 ?>
@@ -34,7 +36,8 @@ $u_id = $user->data()->u_id;
             $comments = $user->db()->get_property_count('c_id','comments', 'i_id', $value['i_id']);
             ?>
             <span>
-                <a href="http://localhost:8080/Camagru/view_image.php?name=<?php echo $value['i_name']?>&u_id=<?php echo $u_id?>">
+                <a href="http://localhost:8080/Camagru/view_image.php?name=<?php echo $value['i_name']?>&u_id=<?php
+                 echo $u_id?>&logged_in=<?php echo $logged_in ?>&src=gallery">
                     <img src="http://localhost:8080/Camagru/usergallery/<?php echo $value['i_name'] ?>" width= 30% heigth=30%>
                 </a>
                 <form action="like.php" method="post">

@@ -1,7 +1,8 @@
 <?php
 require_once 'core/init.php';
 
-if (!Input::get("logged_in")){
+
+if (!(Input::get("logged_in"))){
     Session::flash('login', 'You need to be logged in to comment!');
     Redirect::to('login.php');
 }
@@ -28,18 +29,10 @@ $db->insert('comments', array(
     'creation_date' => date('Y-m-d H:i:s'),
     'comment' => $comment
 ));
-Session::flash('gallery', 'Comment sent!');
-Redirect::to('gallery.php');
-
-
-if (($db->get_property('notify','users', array('u_id', '=', $u_id)))[0]->notify) {
-    $subject = 'You got a comment';
-    $message = 'Your image got a comment.';
-    // $message .= "<a href='http://localhost:8080/Camagru/confirm.php'>Confirm Account</a>";
-    $headers = 'From:noreply@camagru.vr.vscott' . "\r\n";
-    $headers .= "MIME-Version: 1.0" . "\r\n";
-    $headers .= "Content-Type:text/html;charset=UTF-8". "\r\n";
-    mail($email, $subject, $message, $headers);
+if (Input::get("src") === 'gallery') {
+    Session::flash('gallery', "Comment sent!");
+    Redirect::to('gallery.php');
+} else {
+    Session::flash('upload', "Comment sent!");
+    Redirect::to('cam.php');
 }
-Session::flash('gallery', 'Image commented!');
-Redirect::to('gallery.php');

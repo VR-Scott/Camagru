@@ -52,13 +52,13 @@ if (Input::exists()) {
                 $email = Input::get('email');
                 $u_name = Input::get('u_name');
                 $subject = 'Signup | Verification';
-                $message = 'Thank you for registerimg. Please click the link to verify your registration:';
+                $message = 'Thank you for registering. Please click the link to verify your registration:';
                 $message .= "<a href='http://localhost:8080/Camagru/confirm.php?user=$u_name&salt=$salt'>Confirm Account</a>";
                 $headers = 'From:noreply@camagru.vr.vscott' . "\r\n";
                 $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-Type:text/html;charset=UTF-8". "\r\n";
                 mail($email, $subject, $message, $headers);
-                Session::flash('home', 'Please check your email for confirmation notify is:' . Input::get('notify'));
+                Session::flash('home', 'Please check your email for confirmation');
                 Redirect::to('index.php');
 
             } catch (Exception $e) {

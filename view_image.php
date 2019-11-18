@@ -1,5 +1,6 @@
 <?php
 require_once 'core/init.php';
+$logged_in = Input::get("logged_in");
 $db = DB::getInstance();
 $i_name = Input::get("name");
 $u_id = Input::get("u_id");
@@ -18,6 +19,7 @@ $comments = $db->get_property_count('c_id','comments', 'i_id', $i_id);
     <img src="http://localhost:8080/Camagru/usergallery/<?php echo $i_data[0]->i_name?>" width= 70%>
     <form action="like.php" method="post">
         <input type="hidden" name="logged_in" value="<?php echo $logged_in ?>">
+        <input type="hidden" name="src" value="<?php echo  Input::get("src")?>">
         <input type="hidden" name="u_id" value="<?php echo $p_id ?>">
         <input type="hidden" name="liker" value="<?php echo $u_id ?>">
         <input type="hidden" name="i_id" value="<?php echo $i_id ?>">
@@ -25,6 +27,7 @@ $comments = $db->get_property_count('c_id','comments', 'i_id', $i_id);
     </form>
     <form action="comment.php" method="post">
         <input type="hidden" name="logged_in" value="<?php echo $logged_in ?>">
+        <input type="hidden" name="src" value="<?php echo  Input::get("src")?>">
         <input type="hidden" name="u_id" value="<?php echo $p_id ?>">
         <input type="hidden" name="commenter" value="<?php echo $u_id ?>">
         <input type="hidden" name="i_id" value="<?php echo $i_id ?>">

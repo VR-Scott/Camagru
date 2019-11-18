@@ -38,6 +38,11 @@ if($status = $db->get_like_status($liker_id, $i_id))
         'creation_date' => date('Y-m-d H:i:s'),
         'status' => 1
     ));
-    Session::flash('gallery', 'Image liked!');
-    Redirect::to('gallery.php');
+    if (Input::get("src") === 'gallery') {
+        Session::flash('gallery', "Image liked!");
+        Redirect::to('gallery.php');
+    } else {
+        Session::flash('upload', "Image liked!");
+        Redirect::to('cam.php');
+    }
 }
