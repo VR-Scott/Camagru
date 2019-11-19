@@ -9,6 +9,11 @@ if (Session::exists('gallery')) {
 
 $user = new User();
 $logged_in = ($user->isLoggedIn()) ? 1 : 0 ;
+if ($logged_in){
+    ?><div class="field">
+        <a href="logout.php">log-out</a>
+    </div><?php
+}
 
 $u_id = ($logged_in) ? $user->data()->u_id : '';
     
@@ -20,6 +25,7 @@ $u_id = ($logged_in) ? $user->data()->u_id : '';
 <head>
 </head>
 <body>
+    
     <div class="field">
         <a href="index.php">Home</a>
         <br><br><br><br>

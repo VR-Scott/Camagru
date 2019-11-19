@@ -6,9 +6,12 @@
         // echo Session::flash('success');
     }
 
+    
 
 ?>
-
+<div class="field">
+        <a href="logout.php">log-out</a>
+</div>
 <div class="field">
         <a href="update_email.php"> Update Email</a>
 </div>

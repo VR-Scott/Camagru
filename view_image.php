@@ -1,6 +1,11 @@
 <?php
 require_once 'core/init.php';
 $logged_in = Input::get("logged_in");
+if ($logged_in){
+    ?><div class="field">
+        <a href="logout.php">log-out</a>
+    </div><?php
+}
 $db = DB::getInstance();
 $i_name = Input::get("name");
 $u_id = Input::get("u_id");
@@ -12,9 +17,29 @@ $i_id = $i_data[0]->i_id;
 $likes = $db->get_property_count('l_id','likes', 'i_id', $i_id);
 $comments = $db->get_property_count('c_id','comments', 'i_id', $i_id);
 
+
+
+if (Input::get("src") == "edit"){
+    ?>
+        <div class="field">
+            <a href="cam.php">Back to editer</a>
+        </div>
+    <?php  
+}
+if (Input::get("src") == "gallery"){
+    ?>
+        <div class="field">
+            <a href="gallery.php">Back to gallery</a>
+        </div>
+    <?php  
+}
+
 ?>
 
+
+
 <h3><?php echo $username?>: </h3>
+
 <div>
     <img src="http://localhost:8080/Camagru/usergallery/<?php echo $i_data[0]->i_name?>" width= 70%>
     <form action="like.php" method="post">

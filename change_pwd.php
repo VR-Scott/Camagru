@@ -79,6 +79,9 @@ require_once 'core/init.php';
 </form>
 
 <div class="field">
+        <a href="logout.php">log-out</a>
+</div>
+<div class="field">
         <a href="update.php"> Update Details</a>
 </div>
 

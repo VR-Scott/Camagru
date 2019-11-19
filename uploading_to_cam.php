@@ -46,6 +46,12 @@ if (isset($_POST["submit"])) {
     Redirect::to('cam.php');
 }
 ?>
+<div class="field">
+        <a href="cam.php">Back to editer</a>
+</div>
+<div class="field">
+        <a href="logout.php">log-out</a>
+</div>
 <form action="" method="POST" enctype="multipart/form-data">
     <input type="file" name="file">
     <button type="submit" name="submit" id="submit" required="">UPLOAD</button>

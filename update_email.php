@@ -51,7 +51,9 @@ if (Input::exists()) {
         <input type="hidden" name="token" id="token" value="<?php echo Token::generate(); ?>">
     </div>
 </form>
-
+<div class="field">
+        <a href="logout.php">log-out</a>
+</div>
 <div class="field">
         <a href="update.php"> Update Details</a>
 </div>
